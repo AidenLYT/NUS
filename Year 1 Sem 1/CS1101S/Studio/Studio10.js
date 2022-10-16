@@ -12,13 +12,6 @@ function bubblesort_array(A) {
 //(b) Write the function, bubblesort_list, that takes as argument a list of numbers and uses the bubble sort algorithm to sort the list into ascending order. 
 //Your function must not create any new pair or array, and must not use the function set_tail. 
 //Its runtime must have the same order of growth as that of bubblesort_array.
-function bubblesort_list(L) { 
-   //???
-}
-//Example use:
-const LL = list(3, 5, 2, 4, 1); bubblesort_list(LL);
-LL; // should show [1, [2, [3, [4, [5, null]]]]]
-
 function bubblesort_list(L) {
     const len = length(L);
     for (let i = len - 1; i >= 1; i = i - 1) {
