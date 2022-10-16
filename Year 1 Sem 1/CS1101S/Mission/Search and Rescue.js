@@ -1,3 +1,4 @@
+//Task 1
 function binary_search_tree_to_string(bst) {
     // your answer here
     return is_empty_tree(bst)
@@ -16,6 +17,8 @@ const test_bst = make_tree("e", c, n);
 binary_search_tree_to_string(test_bst);
 // binary_search_tree_to_string(cadet_names);
 
+
+//Task 2
 function find(bst, name) {
     // your answer here
     return is_empty_tree(bst)
@@ -30,6 +33,8 @@ function find(bst, name) {
 // Test
 find(cadet_names, "AIDEN");
 
+
+//Task 3
 function insert(bst, item) {
     // your answer here
     return is_empty_tree(bst)
