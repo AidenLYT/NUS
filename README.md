@@ -1,1 +1,1 @@
-# NUS
+# Learning should be fun :)
