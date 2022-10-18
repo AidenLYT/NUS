@@ -7,7 +7,7 @@ function bubblesort_array(A) {
     } 
   }
 }
-//(a) What is the order of growth of its runtime for an input array of n elements?
+//(a) What is the order of growth of its runtime for an input array of n elements? Θn^2
 
 //(b) Write the function, bubblesort_list, that takes as argument a list of numbers and uses the bubble sort algorithm to sort the list into ascending order. 
 //Your function must not create any new pair or array, and must not use the function set_tail. 
@@ -95,4 +95,35 @@ function mcc(n, k) {
 
 mcc(365, 5);  // Expected result: 1730
   
-//What are the orders of growth in time and space of the memoized version?
+//What are the orders of growth in time and space of the memoized version? Θnk
+  
+  
+//In class assignments
+function rotate_matrix(M){
+    function swap(M, i, j){
+        let temp = M[i];
+        M[i] = M[j];
+        M[j] = temp;
+    }
+    
+    function reverse_array(M){
+        for (let i = 0; i < math_floor(array_length(M) / 2); i = i + 1){
+            swap(M, i, array_length(M) - 1 - i);
+        }
+        return M;
+    }
+    
+    let A = reverse_array(M);
+    for (let i = 0; i < array_length(A); i = i + 1){
+        for (let j = i; j < array_length(A); j = j + 1){
+            //Swap function
+            let temp = A[i][j];
+            A[i][j] = A[j][i];
+            A[j][i] = temp;
+        }
+    }
+    return A;
+}
+    
+
+rotate_matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]);
