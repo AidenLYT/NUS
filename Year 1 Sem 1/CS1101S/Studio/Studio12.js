@@ -37,6 +37,61 @@ function reorder_statements(stmts) {
     return append(head(split), tail(split));
 }
 
+//Check each and every one of the evaluation 
+// CHANGED HERE
+// Follow the structure of evaluate
+// to catch everything.
+// No need to return any value; 
+// just raise error whenever an
+// undeclared name occurs
+function check_names(component, env) {
+    is_literal(component)
+    ? "ok"
+    : is_name(component)
+    ? lookup_symbol_value(symbol_of_name(component), env)
+    : is_application(component)
+    ? check_names(
+          make_sequence(
+              pair(function_expression(component), 
+                   arg_expressions(component))),
+          env)
+    : is_operator_combination(component)
+    ? check_names(operator_combination_to_application(component), env)
+    : is_conditional(component)
+    ? check_names(
+          make_sequence(
+              list(conditional_predicate(component),
+                   conditional_consequent(component),
+                   conditional_alternative(component))),
+          env)
+    : is_lambda_expression(component)
+    ? check_names(lambda_body(component), 
+                  extend_environment(
+                      lambda_parameter_symbols(component),
+                      list_of_unassigned(
+                         lambda_parameter_symbols(component)),
+                      env))
+    : is_sequence(component)
+    ? map(stmt => check_names(stmt, env),
+          sequence_statements(component))
+    : is_block(component)
+    ? check_names(block_body(component), 
+                  extend_environment(
+                      scan_out_declarations(block_body(component)),
+                      list_of_unassigned(
+                          scan_out_declarations(block_body(component))),
+                      env))
+    : is_function_declaration(component)	    
+    ? check_names(function_decl_to_constant_decl(component), env)
+    : is_declaration(component)
+    ? check_names(make_sequence(
+                      list(make_name(declaration_symbol(component)), 
+                           declaration_value_expression(component))),
+                  env)
+          : error(component, "Unknown syntax -- check_names");
+}
+
+
 
 //In-class
 // const x = y;
