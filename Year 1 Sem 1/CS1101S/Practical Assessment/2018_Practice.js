@@ -88,8 +88,13 @@ assert("1A_5", () => make_big_int_from_number(9876543210),
 function big_int_to_string(bint) {
 
     // WRITE HERE.
-    return list_to_string(reverse(bint));
-
+    function number(X, ref, multi){
+        return ref < 0
+            ? 0
+            : (math_pow(10, multi) * list_ref(X, ref)) 
+                + number(X, ref - 1, multi - 1);
+    }
+    retunr number(bint, length(bint) - 1, length(bint) - 1); 
 }
 
 
