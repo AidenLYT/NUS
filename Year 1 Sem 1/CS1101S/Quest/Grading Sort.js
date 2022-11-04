@@ -145,8 +145,18 @@ function graderVer2(arr){
       } else { 
         return y(tail(lst), bool, lower + ((head(lst) < x) ? 1 : 0), higher);
       }
-   }
-   return y;
-}, arr)));
+    }
+    return y;
+  }, arr)));
 }
       
+//Rationale
+/*
+Try list(6, 4, 8, 2, 5, 1, 7 , 3)
+
+6: 0 * 5 = 0
+4: 1 * 3 = 3 
+8: 0 * 5 = 0
+... 
+Total triples = 11
+*/
