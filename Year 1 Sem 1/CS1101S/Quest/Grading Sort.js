@@ -102,7 +102,7 @@ function graderVer1(arr){
 }
 
 //Rationale
-/* 
+/*
 #inv in (6, 4, 8, 2)
 2 + 1 + 1 = 4
 #inv in (5, 1, 7, 3)
@@ -121,4 +121,32 @@ function graderVer1(arr){
   ...
   
 Total #inv = 17
-*/ 
+*/
+
+//Question 4 
+function graderVer2(arr){
+  //map a function that counts the number of 2-inversions to arr
+  //and accumulates it
+  return accumulate((x, y) => {
+    return x +y;
+  }, 0, map(f => {
+    return f(arr, true, 0, 0);
+  }, map(x => {
+    function y(lst, bool, lower, higher){
+      //Are we at the end?
+      if (is_null(lst)){
+        return lower * higher;
+      } else {}
+      // We found the middle guy?
+      if (head(lst) === x){
+        return y(tail(lst), !bool, lower, higher);
+      } else if (biil){
+        return y(tail(lst), bool, lower, higher + ((head(lst) > x) ? 1 : 0));
+      } else { 
+        return y(tail(lst), bool, lower + ((head(lst) < x) ? 1 : 0), higher);
+      }
+   }
+   return y;
+}, arr)));
+}
+      
