@@ -1,4 +1,53 @@
+//Question 1A
+function is_pa_word(s) {
+    // your solution goes here
+    function helper(s, firstposition, secondposition){
+        if (char_at(s, 8) === undefined){
+            return false; 
+        } else {
+            if (char_at(s, secondposition) === undefined){
+                return true;
+            } else {
+                return char_at(s, firstposition) === char_at(s, secondposition)
+                    ? false
+                    : helper(s, firstposition +1, secondposition + 1); 
+            }
+        }
+    }
+    return helper(s, 0, 1);
+}
 
+//Question 1B
+function count_matches(char, pos) {
+    // your solution goes here
+    const words = filter(x => char_at(x, pos) === char ,pa_words);
+    return length(words);
+}
+
+//Question 1C
+
+
+//Question 1D
+function solve(n, constraints) {
+    // your solution goes here
+    let wording = pa_words;
+    
+    function filtering(char, pos, words){
+        const filteredwords = filter(x => char_at(x, pos) === char, words);
+        return wording = filteredwords;
+    }
+    
+    function helper(n, constraints){
+        if (is_null(constraints)){
+            const final = filter(x => string_length(x) === n, wording); 
+            return final; 
+        } else { 
+            filtering(tail(head(constraints)), head(head(constraints)), wording);
+            return helper(n, remove(list_ref(constraints, 0), constraints));
+        }
+    }
+    return helper(n, constraints);
+}
 
 
 //Question 3
