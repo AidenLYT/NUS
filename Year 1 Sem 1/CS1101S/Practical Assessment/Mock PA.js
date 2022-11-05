@@ -49,6 +49,61 @@ function solve(n, constraints) {
     return helper(n, constraints);
 }
 
+//Question 2A
+function eval_poly(poly) {
+
+    // WRITE YOUR SOLUTION HERE.
+    function calc(x){
+        return is_null(poly)
+            ? 0
+            : head(head(poly)) * math_pow(x, tail(head(poly))) + eval_poly(tail(poly))(x);
+    }
+    return calc;
+}
+
+const poly = list(pair(2, 0), pair(3, 2), pair(-5, 3), pair(8, 6));
+const p = eval_poly(poly);
+p(2); 
+
+//Question 2B 
+function add_poly(poly1, poly2) {
+    if (is_null(poly1)) {
+        // WRITE YOUR SOLUTION HERE.
+        return poly2;
+    } else if (is_null(poly2)) {
+        // WRITE YOUR SOLUTION HERE.
+        return poly1;
+    } else {
+        const coeff1 = head(head(poly1));
+        const coeff2 = head(head(poly2));
+        const exp1 = tail(head(poly1));
+        const exp2 = tail(head(poly2));
+    
+        if (exp1 === exp2) {
+            // WRITE YOUR SOLUTION HERE.
+            if (coeff2 + coeff1 === 0){
+                return add_poly(tail(poly2), tail(poly1));
+            } else {
+                const n1 = list(pair(coeff1 + coeff2, exp1));
+                return append(n1, add_poly(tail(poly1), tail(poly2)));
+            } 
+        } else if (exp1 < exp2) {
+            // WRITE YOUR SOLUTION HERE.
+            const n2 = list(pair(coeff1, exp1));
+            return append(n2, add_poly(tail(poly1), poly2));
+    
+        } else {
+            // WRITE YOUR SOLUTION HERE.
+            const n3 = list(pair(coeff2, exp2));
+            return append(n3, add_poly(poly1, tail(poly2)));
+        }
+    }
+}
+
+const poly1 = list(pair(2, 0), pair(3, 2), pair(-5, 3), pair(8, 6));
+const poly2 = list(pair(1, 1), pair(4, 2), pair(5, 3), pair(9, 5));
+add_poly(poly1, poly2);
+
 
 //Question 3
 function alt_column_matrix(R, C) {
