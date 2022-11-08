@@ -155,7 +155,28 @@ function find_gene_end(xs) {
 function all_genes(xs) {
 
     // WRITE HERE.
-
+    let gene_arr = [];
+    function gene_finder(xs, arr_pos){
+        if (is_null(find_gene_start(xs))){
+            return null; 
+        } else if (is_null(find_gene_end(head(find_gene_start(xs))))){ 
+            return null;
+        } else {
+            gene_arr[arr_pos] = find_gene_end(head(find_gene_start(xs)));
+            return gene_finder(head(find_gene_start(xs)), arr_pos + 1);
+        }
+    }
+    gene_finder(xs, 0);
+    function list_gen(arr, pos){
+        if (!is_list(gene_arr[0])){
+            return null;
+        } else if (pos === array_length(arr)){
+            return null;
+        } else {
+            return pair(arr[pos][0], list_gen(arr, pos + 1)); 
+        }
+    }
+    return list_gen(gene_arr, 0);
 }
 
 
